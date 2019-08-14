@@ -1,0 +1,34 @@
+#! /bin/bash
+
+
+for var in `ls *.h` `ls *.c`
+do
+	ci $var
+done
+
+for var in `ls *.h,v` `ls *.c,v`
+do
+	co $var
+done
+
+if ( make )
+then
+	echo "do you want to run code(y/n)?"
+	read 
+	
+	 if [ $REPLY = 'y' ]
+	then	
+		./output
+	fi
+	
+else
+	echo "make unsuccessful....."
+fi
+
+
+for var in `ls *.h,v` `ls *.c,v`
+do
+	co -l $var
+done
+
+
